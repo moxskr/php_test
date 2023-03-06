@@ -15,8 +15,8 @@
         $sql = "INSERT INTO Users (username, password) VALUES (:username, :password)";
         $stmt = $conn->prepare($sql);
 
-        $login = $_POST["login"];
-        $password = $_POST["password"];
+        $login = htmlspecialchars(strip_tags($_POST["login"]), ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars(strip_tags($_POST["password"]), ENT_QUOTES, 'UTF-8');
 
         $stmt->bindValue(":username", $login);
         $stmt->bindValue(":password", $password);

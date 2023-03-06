@@ -13,19 +13,19 @@
     <hr>
 
     <?php 
-    
-    $username = $_GET['user'];
+
+    $username = htmlspecialchars($_GET['user']);
 
     $conn = new PDO("mysql:host=localhost;dbname=diplom", "root", "");
 
     $sql = "SELECT * FROM article";
-    
+
     $result = $conn->query($sql);
 
     foreach($result as $row) {
-        $articleName = $row["name"];
-        $articleText = $row["text"];
-        $articleLink = $row["link"];
+        $articleName = htmlspecialchars($row["name"]);
+        $articleText = htmlspecialchars($row["text"]);
+        $articleLink = htmlspecialchars($row["link"]);
 
         echo "<h4>".$articleName."</h4>";
         echo "<p>".$articleText."</p>";

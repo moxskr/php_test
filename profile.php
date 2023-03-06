@@ -16,7 +16,7 @@
     <br>
     <br>
 
-    <button>Back to home page</button>
+    <a href="/home.php">Back to home page</a>
 
 </body>
 </html>

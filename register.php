@@ -10,10 +10,11 @@
 
     <h2>Sign up form</h2>
     <form action="login.php" method="POST">
-    <p>Enter login: <input type="text" name="login" /></p>
-    <p>Enter password: <input type="password" name="password" /></p>
-    <p>Verify password: <input type="password" name="verifypassword" /></p>
-    <input type="submit" value="send">
+        <p>Enter login: <input type="text" name="login" /></p>
+        <p>Enter password: <input type="password" name="password" /></p>
+        <p>Verify password: <input type="password" name="verifypassword" /></p>
+        <input type="submit" value="send">
+    </form>
 
     <a href="index.html">
         Log in

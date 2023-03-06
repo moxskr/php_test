@@ -10,53 +10,51 @@
     
     <?php 
 
-        $conn = new PDO("mysql:host=localhost;dbname=diplom", "root", "");
+    $conn = new PDO("mysql:host=localhost;dbname=diplom", "root", "");
 
-        $articleLink = $_GET['article'];
+    $articleLink = htmlentities($_GET['article'], ENT_QUOTES, 'UTF-8');
 
-        $sql = "SELECT * FROM article WHERE link = :article_link";
+    $sql = "SELECT * FROM article WHERE link = :article_link";
 
-        $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);
 
-        $stmt->bindValue(":article_link", $articleLink);
+    $stmt->bindValue(":article_link", $articleLink);
 
-        $stmt->execute();
+    $stmt->execute();
 
-        echo "<span>/".$articleLink."</span>";
+    echo "<span>/".htmlentities($articleLink, ENT_QUOTES, 'UTF-8')."</span>";
 
-        if($stmt->rowCount() > 0) 
-        {
-            foreach($stmt as $row) {
-                $articleName = $row["name"];
-                $articleText = $row["fullarticle"];
-                $articleLink = $row["link"];
-        
-                echo "<h2>".$articleName."</h2>";
-                echo "<p>".$articleText."</p>";
-            }
+    if($stmt->rowCount() > 0) 
+    {
+        foreach($stmt as $row) {
+            $articleName = $row["name"];
+            $articleText = $row["fullarticle"];
+            $articleLink = $row["link"];
+
+            echo "<h2>".htmlentities($articleName, ENT_QUOTES, 'UTF-8')."</h2>";
+            echo "<p>".htmlentities($articleText, ENT_QUOTES, 'UTF-8')."</p>";
         }
+    }
 
     ?>
 
-    <a href="/home.php?user=<?php echo $_GET['user']?>">Back to home page</a>
+    <a href="/home.php?user=<?php echo htmlentities($_GET['user'], ENT_QUOTES, 'UTF-8'); ?>">Back to home page</a>
 
     <hr />
 
     <h4>Comments</h4>
 
     <form action="comment.php" method="POST">
-        <p>User: <?php echo $_GET['user']?></p>
-        <input type="text" value="<?php echo $_GET['user']?>" style="display: none;" name="username">
-        <input type="text" value="<?php echo $_GET['article']?>" style="display: none;" name="article">
-        <p><textarea name="text" placeholder="Leave comment"></textarea></p>
-        <input type="submit" value="Send">
+        <p>User: <?php echo htmlentities($_GET['user'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <input type="text" value="<?php echo htmlspecialchars($_GET['user'], ENT_QUOTES, 'UTF-8'); ?>" style="display: none;" name="username">
+        <input type="text" value="<?php echo htmlspecialchars($_GET['article'], ENT_QUOTES, 'UTF-8'); ?>" style="display: none;" name="article">
     </form>
 
     <hr>
     
     <?php 
 
-        $articleLink = $_GET['article'];
+        $articleLink = htmlentities($_GET['article'], ENT_QUOTES, 'UTF-8');
 
         $sql = "SELECT * FROM comments WHERE article = :article_link";
 
@@ -72,8 +70,8 @@
                 $username = $row["username"];
                 $text = $row["text"];
 
-                echo "<a href='profile.php?user=".$username."'>".$username."</a>";
-                echo "<p>".$text."</p>";
+                echo "<a href='profile.php?user=".htmlentities($username, ENT_QUOTES, 'UTF-8')."'>".htmlentities($username, ENT_QUOTES, 'UTF-8')."</a>";
+                echo "<p>".htmlentities($username, ENT_QUOTES, 'UTF-8')."</p>";
                 echo "<hr>";
             }
         }
